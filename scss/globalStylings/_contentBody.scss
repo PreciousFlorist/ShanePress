@@ -1,0 +1,25 @@
+.contentBody{
+    max-width: 1085px;
+
+    grid-area: content;
+    .wrapper{
+        margin: 3.125rem auto;
+        max-width: 45rem;
+        h1{
+            font-family: $headingFont;
+            font-size: 300%;
+            margin-bottom: $moderateSpacing;
+        }
+        p{
+            font-family: $textFont;
+            margin-bottom: $minorSpacing;
+            line-height: 1.15;
+        }
+    }
+}
+
+@media (min-width: 415px){
+    .contentBody{
+        padding: 3.125rem 0;
+    }
+}

@@ -1,0 +1,112 @@
+.backEndNavWrapper{
+    grid-area: nav;
+    max-height: 50px;
+    nav{
+        padding-top: $minorSpacing;
+        display: flex;
+        justify-content: space-between;
+
+        .hamburger {
+            margin-left: $moderateSpacing;
+            display: inline-block;
+            cursor: pointer;
+
+            .fa-plus {
+                color: $textColour;
+                text-decoration: none;
+                font-size: 200%;
+                transition: 0.4s;
+                background: none;
+                border: none;
+                cursor: pointer;
+ 
+                :active, :focus {
+                    outline: 0;
+                    border: 0;
+                }
+            }
+            .navOverlay{
+                display: none;
+            }
+        }
+            // After Toggle
+        .cross{
+                .fa-plus{
+                    position: relative;
+                    z-index: 10000;
+                    transform: rotate(-45deg);
+                    color: $activeLink;
+                    background: none;
+                    border: none;
+
+                    :active, :hover, :focus, :visited{
+                        outline: 0;
+                        border: 0;
+                    }   
+                }
+
+            .navOverlay{
+
+                z-index: 5;
+
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                display: block;
+                background-color: rgba(255, 255, 255, 0.50);
+                background-image: linear-gradient(to right, rgba(255, 255, 255, 0.75) , rgba(245, 245, 245, 0.75));
+
+                .navWrapper{
+                    z-index: 100;
+                    position: fixed;
+                    top: 15%;
+                    right: 90vw;
+                    left: 5vw;
+
+                    button{
+                        width: 15rem;
+                        @include button;
+                    }
+
+                    form{
+                        button{
+                            @include activeButton;
+                        }
+                    }
+                    ul{
+                        width: 15rem;
+                        li{
+                            margin: .8rem 0;
+                        }
+                    }
+                    // ul li{
+                    //     margin-left: $moderateSpacing;
+                    //     font-family: $textFont;
+
+                    //     font-weight: 600;
+                    //     font-size: 200%;
+                    //     width: auto;
+                    //     margin-bottom: 2rem; 
+  
+                    //     a{
+                    //         margin-left: $moderateSpacing;
+                    //         font-family: $textFont;
+                    //         font-weight: 600;
+                    //         font-size: 2rem;
+                    //         width: auto;
+                    //         :hover{
+                    //             transform: scale(1.005);
+                    //         }
+                    //         :active{
+                    //             transform: scale(1.013);
+                    //         }
+                    //     }
+                    // }
+                }
+            }
+        }
+    }
+}

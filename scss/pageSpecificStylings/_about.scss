@@ -1,0 +1,87 @@
+@media (min-width: 320px){
+    .aboutPage{
+        .wrapper{
+            .content{
+                .paragraphContent{
+                    @include fitContent;
+                    margin-bottom: $moderateSpacing;
+                }
+                .aboutImage{
+                    height: 25rem;
+                    width: 100%;
+                    margin-bottom: $moderateSpacing;
+                    img{
+                        @include imageFit;    
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1029px) {
+    .aboutPage{
+        @include flexCenter;
+        .wrapper{
+            @include wrapperGrid;
+            .intro{
+                grid-area: h1;
+            }
+            .intro > *{
+                // h1{
+                    font-size: 400%;
+                // }
+            }
+            .content{
+                grid-area: c;
+                display: flex;
+                .paragraphContent{
+
+                    flex: 0 0 60%;
+
+                }
+                .aboutImage {
+                    height: auto;
+                    margin-right: $moderateSpacing;
+                    flex: 1;
+                    position: relative;
+                    
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center bottom;
+                        display: none;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: 1290px) {
+    .wrapper{
+        height: auto;
+        .intro > *{
+            // h1{
+                font-size: 400%;
+            // }
+        }
+        .paragraphContent > * {
+            font-size: 105%;
+        }
+    }
+}
+@media (min-width: 1435px) {
+    .aboutPage{
+        .wrapper{
+            .intro > * {
+                font-size: 500%;
+            }
+        }
+    }
+}
+

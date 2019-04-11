@@ -1,0 +1,142 @@
+.editBackend{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+
+
+        h1{
+            color: $headingFont;
+        }
+        
+        .formGroup{
+
+            
+            
+            display: block;
+            .titleInput, .paragraphInput{
+                label{
+                    display: block;
+                    margin-top: $moderateSpacing;
+                }
+            }
+            .titleInput{
+                input{
+                    font-family: $headingFont;
+                    font-size: 150%;
+                    color: $textColour;
+                    width: 100%;
+                }
+            }
+
+            .submitRow{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            label{
+                @include formLabel;
+            }
+            input{
+                @include formInput;
+            }
+
+            textarea{
+                @include formInput;
+                width: 100%;
+                height: 300px;
+                resize: none;
+            }
+
+            button{
+                @include button;
+                margin: 0;
+            }
+            button:active{
+                @include activeButton;
+            }
+        }
+    }
+}
+
+
+
+
+@media (min-width: 1272px){
+    .editBackend{
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.editBackend{
+    .formGroup{
+
+        svg{
+            fill: $textColour;
+        }
+
+        .accordion{
+            @include button;
+            width: 100%;
+            transition: 10;
+        }
+        .accordion:active{
+            @include button;
+            transition: 10;
+        }
+        .svgAlign{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            .svg {
+                width: 75%;
+            }
+            .svgDelete{
+                color: $activeLink;
+                position: absolute;
+                right: 0;
+                width: 20%;
+                height: 56px;
+                margin: 0.938rem 0;
+        
+            }
+        }
+        input{
+            width: 100% ;
+        }
+    }
+}
+
+.editBackend .wrapper .formGroup textarea {
+    margin: 0.938rem 0;
+}
+
+.editBackend .wrapper .formGroup input{
+    font-family: $headingFont;
+    font-size: 150%;
+    color: $textColour;
+    margin: 0.938rem 0;
+}
+
+.editBackend .wrapper .formGroup .svg{
+    font-family: $textFont;
+
+}
+
+.updateProject{
+    @include button;
+}
+.updateProject:active{
+    @include activeButton;
+}
+
+.editProjects .wrapper .formGroup .panel label{
+    margin: 0.938rem 0 0.625rem 0;
+}

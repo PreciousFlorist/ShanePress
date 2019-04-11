@@ -1,0 +1,42 @@
+@media (min-width:320px){
+    .footerWrapper{
+        grid-area: footer;
+        position: relative;
+        border-top: 1.5px solid $darkAccent;
+        footer{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+           left: 0;
+           padding-bottom: $minorSpacing;
+           display: flex;
+           justify-content: space-evenly;
+           .footerTitle{
+               text-align: center;
+               font-family: $textFont;
+               font-weight: 600;
+               margin-bottom: $minorSpacing;
+           } 
+           .social ul{
+               display: flex;
+               font-size: 105%;
+               justify-content: space-between;
+               a {
+                   font-family: $textFont;
+                   :hover{
+                       transform: scale(1.1);  
+                   }
+   
+           .contact{
+               a{
+                   font-size: 85%;
+                   :hover{
+                       transform: scale(1.1);
+                   }  
+               }
+           }
+               }
+           }
+        }
+   }
+}

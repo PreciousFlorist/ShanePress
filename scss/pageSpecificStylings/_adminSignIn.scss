@@ -1,0 +1,29 @@
+.adminAccess{
+
+
+    .wrapper{
+        @include pageCenter;
+        display: block;
+
+        h1{
+            @include mobilePageTitle;
+            font-family: $headingFont;
+        }
+        .formGroup{
+
+            label{
+                @include formLabel;
+            }
+            input{
+                @include formInput;
+                width: 100%;
+            }
+        }
+        button{
+            @include button;
+        }
+        button:active{
+            @include activeButton;
+        }
+    }
+}

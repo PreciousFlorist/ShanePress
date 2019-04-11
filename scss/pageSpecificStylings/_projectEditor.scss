@@ -1,0 +1,68 @@
+// .editBackend{
+//     .formGroup{
+//         .fab {
+//             font-weight: normal;
+//             font-size: 1.5rem;
+//         }
+//         svg{
+//             fill: $textColour;
+//         }
+
+//         .accordion{
+//             @include button;
+//             width: 100%;
+//             transition: 10;
+//         }
+//         .accordion:active{
+//             @include button;
+//             transition: 10;
+//         }
+//         .svgAlign{
+//             display: flex;
+//             flex-direction: row;
+//             position: relative;
+//             .svg {
+//                 width: 75%;
+//             }
+//             .svgDelete{
+//                 color: $activeLink;
+//                 position: absolute;
+//                 right: 0;
+//                 width: 20%;
+//                 height: 56px;
+//                 margin: 0.938rem 0;
+        
+//             }
+//         }
+//         input{
+//             width: 100% ;
+//         }
+//     }
+// }
+
+// .editBackend .wrapper .formGroup textarea {
+//     margin: 0.938rem 0;
+// }
+
+// .editBackend .wrapper .formGroup input{
+//     font-family: $headingFont;
+//     font-size: 150%;
+//     color: $textColour;
+//     margin: 0.938rem 0;
+// }
+
+// .editBackend .wrapper .formGroup .svg{
+//     font-family: $textFont;
+
+// }
+
+// .updateProject{
+//     @include button;
+// }
+// .updateProject:active{
+//     @include activeButton;
+// }
+
+// .editProjects .wrapper .formGroup .panel label{
+//     margin: 0.938rem 0 0.625rem 0;
+// }

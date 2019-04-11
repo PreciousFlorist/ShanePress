@@ -1,0 +1,80 @@
+.projectBody{
+    max-width: 785px;
+    margin: 50px 0 ;
+    grid-area: content;
+
+    .completedImage{
+        width: 100%;
+        margin: $moderateSpacing 0;
+        img{
+            @include imageFit;
+            transition: transform .2s;
+        }
+        img:hover{
+            transform: scale(1.01);              
+        }
+    }
+
+    h1{
+        font-family: $headingFont;
+        font-size: 300%;
+        margin-bottom: $moderateSpacing;
+    }
+    p {
+        font-family: $textFont;
+        margin-bottom: $minorSpacing;
+        line-height: 1.15;
+    }
+    .tools{
+        display: flex;
+        justify-content: space-evenly;
+        margin: $minorSpacing 0;
+        color: $darkAccent;
+        li{
+            color: $textColour;
+            font-size: 200%;
+            * {
+                // The !important tags are to overide any default stylings that may be included within the svg uploaded by the backend user
+                height: 2rem !important;
+                width: 2rem !important;
+            }
+            svg{
+                fill: $textColour;
+            }
+        }
+    }
+    // Images
+    .heroImage{
+        height: 40vh;
+            width: 100%;
+    }
+    .subHeroImage{
+        height: 30vh;
+        width: 100%;
+    }
+
+    .minorCards{
+        grid-area: content;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        width: auto;
+        .galleryImage{
+            height: 18.75rem;
+            width: 100%;
+        }
+    }
+    
+}
+
+@media(min-width: 800px){
+    .projectBody{
+
+        margin-left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+    
+}

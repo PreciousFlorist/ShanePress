@@ -1,0 +1,178 @@
+@media (min-width: 320px) {
+    .workPage{
+        .wrapper{
+            .paragraphContent{
+                margin-bottom: $moderateSpacing;
+            }
+            .projects{
+                    display: block;
+                    .workCard{
+                    margin-bottom: $minorSpacing;
+                    a{
+                        text-decoration: none;
+
+                        .workImage{
+                            display: flex;
+                            flex-direction: column;
+                            height: 15rem;
+                            width: 100%;
+                            margin-bottom: $moderateSpacing;
+                            img{
+                                @include imageFit; 
+                                transition: transform .2s;
+                            }
+                            .topCenterImage{
+                                object-position: $topCenterImage;
+                            }
+                        }
+                        .cardContent{
+                            grid-area: content;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-top: $minorSpacing;
+                            color: $textColour;
+
+                            p{
+                                color: $link;
+                                text-decoration: underline;
+                                font-size: 105%;
+                                margin-bottom: $minorSpacing;
+                            }
+                            .tools {
+                                display: flex;
+                            }
+                            .tools li {
+                                
+                                font-size: 1.25rem;
+                                color: $textColour;
+                                margin: 0 .5rem;
+
+                                height: 21px;
+                                width: 21px;
+                                flex-direction: row;
+
+                                svg{                                                    
+                                    // The !important tags are to overide any default stylings that may be included within the svg uploaded by the backend user
+                                    fill: $textColour;
+                                    height: 100% !important;
+                                    max-width:100% !important;
+                                }
+                            }
+                            
+                        }
+                        .minorImage{
+                            height: 10rem;
+                            .compassImage{
+                                object-position: $topLeftImage;
+                            }
+                            .newsletterImage{
+                                object-position: $topCenterImage;
+                            }
+                        }
+                    }
+                    
+                    a:hover{
+                        .workImage{
+                            img{
+                                transform: scale(1.005);
+                            }
+                        }
+                    }
+                    a:active{
+                        .workImage{
+                            img{
+                                transform: scale(1.013);
+                            }
+                        }
+                        .cardContent{
+                            p{
+                                color: $activeLink;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+}
+
+@media (min-width: 700px){
+    .workPage{
+        .wrapper{
+            .projects{
+                .workCard{
+                    a{
+                    text-decoration: none;
+                        .workImage{
+                            display: flex;
+                            flex-direction: column;
+                            height: 20em;
+                            width: 100%;
+                            margin-bottom: $moderateSpacing;
+                        }
+                    
+                        .minorImage{
+                            height: 15rem;
+                        }
+                    }
+                }
+            }
+        }   
+    }
+}
+
+@media (min-width: 1029px) {
+    .workPage{
+        margin-left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .wrapper{
+            display: grid;
+            grid-template-columns: .5fr 1fr;
+            grid-template-rows: auto auto auto;
+            grid-template-areas:
+            "h1 h1"
+            "p  p"
+            "c  c";
+            .intro{
+                grid-area: h1;
+            }
+            .intro > * {
+                font-size: 400%;
+            }
+            .paragraphContent{
+                grid-area: p;
+            }
+            .projects{
+                grid-area: c;
+                .workCard{
+                    a{
+                        .workImage{
+                            height: 25rem;
+                        }
+                    
+                        .minorImage{
+                            height: 20rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width: 1435px) {
+    .workPage{
+        .wrapper{
+            .intro > *{
+                // h1{
+                    font-size: 500%;
+                // }
+            }
+        }
+    }
+}
+

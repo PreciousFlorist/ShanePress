@@ -1,0 +1,16 @@
+body{
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: .25fr 3fr .25fr;
+    grid-template-rows: 50px 5fr 74px;
+    grid-template-areas: 
+    "nav    nav     nav     "
+    ".      content .       "
+    "footer footer  footer  ";
+
+    background-color: $backgroundColour;
+
+
+
+}

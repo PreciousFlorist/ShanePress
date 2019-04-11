@@ -1,0 +1,122 @@
+.navWrapper{
+    grid-area: nav;
+    max-height: 50px;
+    nav{
+        padding-top: $minorSpacing;
+        display: flex;
+        justify-content: space-between;
+        .nameTitle{
+            margin-left: $moderateSpacing;
+            font-family: $textFont;
+            font-weight: 600;
+            font-size: 200%;
+            width: auto;
+        }
+
+        .hamburger {
+            margin-right: $moderateSpacing;
+            display: inline-block;
+            cursor: pointer;
+
+            .fa-plus {
+                color: $textColour;
+                text-decoration: none;
+                font-size: 200%;
+                transition: 0.4s;
+                background: none;
+                border: none;
+                cursor: pointer;
+ 
+                :active, :focus {
+                    outline: 0;
+                    border: 0;
+                }
+            }
+            .navOverlay{
+                display: none;
+            }
+        }
+            // After Toggle
+        .cross{
+                .fa-plus{
+                    position: relative;
+                    z-index: 10000;
+                    transform: rotate(-45deg);
+                    color: $activeLink;
+                    background: none;
+                    border: none;
+
+                    :active, :hover, :focus, :visited{
+                        outline: 0;
+                        border: 0;
+                    }   
+                }
+
+            .navOverlay{
+
+                z-index: 5;
+
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+
+                display: block;
+                background-color: rgba(245, 245, 245, 0.911);
+
+                .navWrapper{
+                    z-index: 100;
+                    position: fixed;
+                    top: 40%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    ul li{
+                        text-align: center;
+                        a{
+                            transition: ease-in, 1s;
+                        }
+                    }
+
+                    .general{
+                        font-family: $textFont;
+                        font-weight: 600;
+                        font-size: 300%;
+                        margin-bottom: 25px;
+                        li {
+                            a:hover{
+                                font-size: 255%;
+                                overflow: hidden;
+                            } 
+                        }
+                    }
+
+                    .social{
+                        font-size: 200%;
+                        margin-bottom: 25px;
+                        display: flex;
+                        justify-content: space-around;
+                        li {
+                            a:hover{
+                                font-size: 255%; 
+                            }
+                        }
+                    }
+
+                    .contact{
+                        font-family: $textFont;
+                        font-weight: 600;
+                        font-size: 150%;
+                        margin-bottom: 25px;
+                        li {
+                            a:hover{
+                                font-size: 455%;
+                            } 
+                        }
+                    }  
+                }
+            }
+        }
+    }
+}

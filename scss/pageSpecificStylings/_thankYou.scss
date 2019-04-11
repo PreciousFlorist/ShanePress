@@ -1,0 +1,65 @@
+@media (min-width: 320px) {
+    .thankYouPage{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .wrapper {
+            margin: 50px auto;
+            .thankYou * {
+                font-size: 200%;
+            }
+            .content{
+                display: flex;
+                flex-direction: column-reverse;
+                object-position: 70% 10%;
+                .paragraphContent {
+                    margin: $moderateSpacing 0;
+                    span {
+                        font-weight: 600;
+                    }
+                }
+                .echoImage{
+                    height: 12rem;
+                    img{
+                        @include imageFit;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    .thankYouPage{
+        margin: 0 auto;
+        .wrapper {                
+            .thankYou * {
+                font-size: 270%;
+            }
+            .content{
+                .paragraphContent{
+                    text-align: justify;
+                    margin: $moderateSpacing 0;
+                }
+                .echoImage {
+                    height: 10rem;
+                    width: 100%;
+                    position: relative;
+                    margin: 0 0 0 0 ;
+                    
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: none;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1522 @@
+@charset "UTF-8";
+/* Eric Meyer Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Box Sizing Reset */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Responsive Images Reset */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Anchor Tag Resets */
+a {
+  font-family: "raleway", sans-serif;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #0000EE;
+}
+
+a:active {
+  color: #EE0000;
+}
+
+/* Text Colour Resets */
+h1, h2, h3, h4, h5, h6, p, label {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+  font-size: 1rem;
+}
+
+/* Image Focus */
+.topCenterImage {
+  object-position: top center;
+}
+
+.topLeftImage {
+  object-position: top left;
+}
+
+.topRightImage {
+  object-position: top right;
+}
+
+.centerImage {
+  object-position: center center;
+}
+
+.centerLeftImage {
+  object-position: center left;
+}
+
+.centerRightImage {
+  object-position: center right;
+}
+
+.bottomCenterImage {
+  object-position: bottom center;
+}
+
+.bottomLeftImage {
+  object-position: bottom left;
+}
+
+.bottomRightImage {
+  object-position: bottom right;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  clip-path: none;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 0.25fr 3fr 0.25fr;
+  grid-template-rows: 50px 5fr 74px;
+  grid-template-areas: "nav    nav     nav     " ".      content .       " "footer footer  footer  ";
+  background-color: #f5f5f5;
+}
+
+.contentBody {
+  max-width: 1085px;
+  grid-area: content;
+}
+.contentBody .wrapper {
+  margin: 3.125rem auto;
+  max-width: 45rem;
+}
+.contentBody .wrapper h1 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 300%;
+  margin-bottom: 0.938rem;
+}
+.contentBody .wrapper p {
+  font-family: "raleway", sans-serif;
+  margin-bottom: 0.625rem;
+  line-height: 1.15;
+}
+
+@media (min-width: 415px) {
+  .contentBody {
+    padding: 3.125rem 0;
+  }
+}
+.navWrapper {
+  grid-area: nav;
+  max-height: 50px;
+}
+.navWrapper nav {
+  padding-top: 0.625rem;
+  display: flex;
+  justify-content: space-between;
+}
+.navWrapper nav .nameTitle {
+  margin-left: 0.938rem;
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+  font-size: 200%;
+  width: auto;
+}
+.navWrapper nav .hamburger {
+  margin-right: 0.938rem;
+  display: inline-block;
+  cursor: pointer;
+}
+.navWrapper nav .hamburger .fa-plus {
+  color: rgba(0, 0, 0, 0.75);
+  text-decoration: none;
+  font-size: 200%;
+  transition: 0.4s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.navWrapper nav .hamburger .fa-plus :active, .navWrapper nav .hamburger .fa-plus :focus {
+  outline: 0;
+  border: 0;
+}
+.navWrapper nav .hamburger .navOverlay {
+  display: none;
+}
+.navWrapper nav .cross .fa-plus {
+  position: relative;
+  z-index: 10000;
+  transform: rotate(-45deg);
+  color: #EE0000;
+  background: none;
+  border: none;
+}
+.navWrapper nav .cross .fa-plus :active, .navWrapper nav .cross .fa-plus :hover, .navWrapper nav .cross .fa-plus :focus, .navWrapper nav .cross .fa-plus :visited {
+  outline: 0;
+  border: 0;
+}
+.navWrapper nav .cross .navOverlay {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  background-color: rgba(245, 245, 245, 0.911);
+}
+.navWrapper nav .cross .navOverlay .navWrapper {
+  z-index: 100;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.navWrapper nav .cross .navOverlay .navWrapper ul li {
+  text-align: center;
+}
+.navWrapper nav .cross .navOverlay .navWrapper ul li a {
+  transition: ease-in, 1s;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .general {
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+  font-size: 300%;
+  margin-bottom: 25px;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .general li a:hover {
+  font-size: 255%;
+  overflow: hidden;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .social {
+  font-size: 200%;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-around;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .social li a:hover {
+  font-size: 255%;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .contact {
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+  font-size: 150%;
+  margin-bottom: 25px;
+}
+.navWrapper nav .cross .navOverlay .navWrapper .contact li a:hover {
+  font-size: 455%;
+}
+
+@media (min-width: 320px) {
+  .footerWrapper {
+    grid-area: footer;
+    position: relative;
+    border-top: 1.5px solid #000000;
+  }
+  .footerWrapper footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-bottom: 0.625rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .footerWrapper footer .footerTitle {
+    text-align: center;
+    font-family: "raleway", sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+  }
+  .footerWrapper footer .social ul {
+    display: flex;
+    font-size: 105%;
+    justify-content: space-between;
+  }
+  .footerWrapper footer .social ul a {
+    font-family: "raleway", sans-serif;
+  }
+  .footerWrapper footer .social ul a :hover {
+    transform: scale(1.1);
+  }
+  .footerWrapper footer .social ul a .contact a {
+    font-size: 85%;
+  }
+  .footerWrapper footer .social ul a .contact a :hover {
+    transform: scale(1.1);
+  }
+}
+.backEndNavWrapper {
+  grid-area: nav;
+  max-height: 50px;
+}
+.backEndNavWrapper nav {
+  padding-top: 0.625rem;
+  display: flex;
+  justify-content: space-between;
+}
+.backEndNavWrapper nav .hamburger {
+  margin-left: 0.938rem;
+  display: inline-block;
+  cursor: pointer;
+}
+.backEndNavWrapper nav .hamburger .fa-plus {
+  color: rgba(0, 0, 0, 0.75);
+  text-decoration: none;
+  font-size: 200%;
+  transition: 0.4s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.backEndNavWrapper nav .hamburger .fa-plus :active, .backEndNavWrapper nav .hamburger .fa-plus :focus {
+  outline: 0;
+  border: 0;
+}
+.backEndNavWrapper nav .hamburger .navOverlay {
+  display: none;
+}
+.backEndNavWrapper nav .cross .fa-plus {
+  position: relative;
+  z-index: 10000;
+  transform: rotate(-45deg);
+  color: #EE0000;
+  background: none;
+  border: none;
+}
+.backEndNavWrapper nav .cross .fa-plus :active, .backEndNavWrapper nav .cross .fa-plus :hover, .backEndNavWrapper nav .cross .fa-plus :focus, .backEndNavWrapper nav .cross .fa-plus :visited {
+  outline: 0;
+  border: 0;
+}
+.backEndNavWrapper nav .cross .navOverlay {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.75), rgba(245, 245, 245, 0.75));
+}
+.backEndNavWrapper nav .cross .navOverlay .navWrapper {
+  z-index: 100;
+  position: fixed;
+  top: 15%;
+  right: 90vw;
+  left: 5vw;
+}
+.backEndNavWrapper nav .cross .navOverlay .navWrapper button {
+  width: 15rem;
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+}
+.backEndNavWrapper nav .cross .navOverlay .navWrapper form button {
+  color: #EE0000;
+  border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+}
+.backEndNavWrapper nav .cross .navOverlay .navWrapper ul {
+  width: 15rem;
+}
+.backEndNavWrapper nav .cross .navOverlay .navWrapper ul li {
+  margin: 0.8rem 0;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .open class with JS), and when you move the mouse over it (hover) */
+.open, .accordion:active {
+  transition: 0.4s;
+}
+
+.panel {
+  padding: 1rem 1rem 0 1rem;
+  margin-bottom: 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.panel table {
+  border-spacing: 1rem 0;
+}
+.panel table tr {
+  margin: 0.5rem 0;
+}
+.panel table tr td {
+  padding: 0.5rem;
+}
+.panel table tr td * {
+  margin: 0;
+}
+.panel table tr td td.inputDemo * {
+  margin: 0;
+  padding: 0;
+}
+
+i.pDemo {
+  font-family: "raleway", sans-serif;
+}
+
+i.bDemo {
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+}
+
+i.hDemo {
+  font-family: "Abril Fatface", cursive;
+}
+
+i.highlightDemo {
+  color: #0000EE;
+}
+
+td.inputDemo {
+  text-align: right;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.accordion:after {
+  content: "➕";
+  /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.open:after {
+  content: "➖";
+  /* Unicode character for "minus" sign (-) */
+}
+
+.dialogoverlay {
+  display: none;
+  opacity: 0.8;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #f5f5f5;
+  width: 100%;
+  z-index: 10;
+}
+
+.dialogbox {
+  margin-left: 50%;
+  top: 15rem;
+  transform: translateX(-50%);
+  display: none;
+  position: fixed;
+  background: #f5f5f5;
+  border: solid 0.375rem #ffffff;
+  outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  width: 90vw;
+  max-width: 30rem;
+  z-index: 10;
+}
+.dialogbox .alertWrapper {
+  background: #f5f5f5;
+}
+.dialogbox .alertWrapper .dialogboxhead {
+  background: #f5f5f5;
+  font-family: "Abril Fatface", cursive;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 1.5rem;
+  padding: 0.625rem;
+  text-decoration: underline;
+}
+.dialogbox .alertWrapper .dialogboxbody {
+  background: #f5f5f5;
+  font-family: "raleway", sans-serif;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 1rem;
+  padding: 0.938rem;
+}
+.dialogbox .alertWrapper .dialogboxfoot {
+  background: #f5f5f5;
+  padding: 0.625rem;
+  text-align: right;
+}
+.dialogbox .alertWrapper .dialogboxfoot button {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 0 !important;
+}
+.dialogbox .alertWrapper .dialogboxfoot button:active {
+  color: #EE0000;
+  border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+}
+
+@media (min-width: 320px) {
+  .landingPage .wrapper .content .paragraphContent {
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 0.938rem;
+  }
+  .landingPage .wrapper .content .paragraphContent p .asciiExample {
+    display: none;
+  }
+  .landingPage .wrapper .content .profileImage {
+    height: 25rem;
+    width: 100%;
+    margin-bottom: 0.938rem;
+  }
+  .landingPage .wrapper .content .profileImage img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  }
+}
+@media (min-width: 1029px) {
+  .landingPage {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .landingPage .wrapper {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "h1 h1" "c  c";
+  }
+  .landingPage .wrapper .intro {
+    grid-area: h1;
+  }
+  .landingPage .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .landingPage .wrapper .content {
+    grid-area: c;
+    display: flex;
+  }
+  .landingPage .wrapper .content .paragraphContent {
+    flex: 0 0 35%;
+    margin-right: 0.938rem;
+  }
+  .landingPage .wrapper .content .profileImage {
+    height: auto;
+    margin-left: 0.938rem;
+    flex: 1;
+    position: relative;
+  }
+  .landingPage .wrapper .content .profileImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  .landingPage .wrapper .content .backendImage {
+    height: auto;
+    margin-left: 0.938rem;
+    flex: 1;
+    position: relative;
+  }
+  .landingPage .wrapper .content .backendImage .backendIndexImage {
+    object-position: 40% 0%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+@media (min-width: 1290px) {
+  .wrapper {
+    height: auto;
+  }
+  .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .wrapper .paragraphContent > * {
+    font-size: 105%;
+  }
+}
+@media (min-width: 1435px) {
+  .landingPage .wrapper .intro > * {
+    font-size: 500%;
+  }
+}
+@media (min-width: 320px) {
+  .aboutPage .wrapper .content .paragraphContent {
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 0.938rem;
+  }
+  .aboutPage .wrapper .content .aboutImage {
+    height: 25rem;
+    width: 100%;
+    margin-bottom: 0.938rem;
+  }
+  .aboutPage .wrapper .content .aboutImage img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  }
+}
+@media (min-width: 1029px) {
+  .aboutPage {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .aboutPage .wrapper {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "h1 h1" "c  c";
+  }
+  .aboutPage .wrapper .intro {
+    grid-area: h1;
+  }
+  .aboutPage .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .aboutPage .wrapper .content {
+    grid-area: c;
+    display: flex;
+  }
+  .aboutPage .wrapper .content .paragraphContent {
+    flex: 0 0 60%;
+  }
+  .aboutPage .wrapper .content .aboutImage {
+    height: auto;
+    margin-right: 0.938rem;
+    flex: 1;
+    position: relative;
+  }
+  .aboutPage .wrapper .content .aboutImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+@media (min-width: 1290px) {
+  .wrapper {
+    height: auto;
+  }
+  .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .wrapper .paragraphContent > * {
+    font-size: 105%;
+  }
+}
+@media (min-width: 1435px) {
+  .aboutPage .wrapper .intro > * {
+    font-size: 500%;
+  }
+}
+@media (min-width: 320px) {
+  .workPage .wrapper .paragraphContent {
+    margin-bottom: 0.938rem;
+  }
+  .workPage .wrapper .projects {
+    display: block;
+  }
+  .workPage .wrapper .projects .workCard {
+    margin-bottom: 0.625rem;
+  }
+  .workPage .wrapper .projects .workCard a {
+    text-decoration: none;
+  }
+  .workPage .wrapper .projects .workCard a .workImage {
+    display: flex;
+    flex-direction: column;
+    height: 15rem;
+    width: 100%;
+    margin-bottom: 0.938rem;
+  }
+  .workPage .wrapper .projects .workCard a .workImage img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+    transition: transform 0.2s;
+  }
+  .workPage .wrapper .projects .workCard a .workImage .topCenterImage {
+    object-position: top center;
+  }
+  .workPage .wrapper .projects .workCard a .cardContent {
+    grid-area: content;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.625rem;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .workPage .wrapper .projects .workCard a .cardContent p {
+    color: #0000EE;
+    text-decoration: underline;
+    font-size: 105%;
+    margin-bottom: 0.625rem;
+  }
+  .workPage .wrapper .projects .workCard a .cardContent .tools {
+    display: flex;
+  }
+  .workPage .wrapper .projects .workCard a .cardContent .tools li {
+    font-size: 1.25rem;
+    color: rgba(0, 0, 0, 0.75);
+    margin: 0 0.5rem;
+    height: 21px;
+    width: 21px;
+    flex-direction: row;
+  }
+  .workPage .wrapper .projects .workCard a .cardContent .tools li svg {
+    fill: rgba(0, 0, 0, 0.75);
+    height: 100% !important;
+    max-width: 100% !important;
+  }
+  .workPage .wrapper .projects .workCard a .minorImage {
+    height: 10rem;
+  }
+  .workPage .wrapper .projects .workCard a .minorImage .compassImage {
+    object-position: top left;
+  }
+  .workPage .wrapper .projects .workCard a .minorImage .newsletterImage {
+    object-position: top center;
+  }
+  .workPage .wrapper .projects .workCard a:hover .workImage img {
+    transform: scale(1.005);
+  }
+  .workPage .wrapper .projects .workCard a:active .workImage img {
+    transform: scale(1.013);
+  }
+  .workPage .wrapper .projects .workCard a:active .cardContent p {
+    color: #EE0000;
+  }
+}
+@media (min-width: 700px) {
+  .workPage .wrapper .projects .workCard a {
+    text-decoration: none;
+  }
+  .workPage .wrapper .projects .workCard a .workImage {
+    display: flex;
+    flex-direction: column;
+    height: 20em;
+    width: 100%;
+    margin-bottom: 0.938rem;
+  }
+  .workPage .wrapper .projects .workCard a .minorImage {
+    height: 15rem;
+  }
+}
+@media (min-width: 1029px) {
+  .workPage {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .workPage .wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "h1 h1" "p  p" "c  c";
+  }
+  .workPage .wrapper .intro {
+    grid-area: h1;
+  }
+  .workPage .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .workPage .wrapper .paragraphContent {
+    grid-area: p;
+  }
+  .workPage .wrapper .projects {
+    grid-area: c;
+  }
+  .workPage .wrapper .projects .workCard a .workImage {
+    height: 25rem;
+  }
+  .workPage .wrapper .projects .workCard a .minorImage {
+    height: 20rem;
+  }
+}
+@media (min-width: 1435px) {
+  .workPage .wrapper .intro > * {
+    font-size: 500%;
+  }
+}
+.projectBody {
+  max-width: 785px;
+  margin: 50px 0;
+  grid-area: content;
+}
+.projectBody .completedImage {
+  width: 100%;
+  margin: 0.938rem 0;
+}
+.projectBody .completedImage img {
+  object-fit: cover;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border: solid 0.375rem #ffffff;
+  outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  transition: transform 0.2s;
+}
+.projectBody .completedImage img:hover {
+  transform: scale(1.01);
+}
+.projectBody h1 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 300%;
+  margin-bottom: 0.938rem;
+}
+.projectBody p {
+  font-family: "raleway", sans-serif;
+  margin-bottom: 0.625rem;
+  line-height: 1.15;
+}
+.projectBody .tools {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0.625rem 0;
+  color: #000000;
+}
+.projectBody .tools li {
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 200%;
+}
+.projectBody .tools li * {
+  height: 2rem !important;
+  width: 2rem !important;
+}
+.projectBody .tools li svg {
+  fill: rgba(0, 0, 0, 0.75);
+}
+.projectBody .heroImage {
+  height: 40vh;
+  width: 100%;
+}
+.projectBody .subHeroImage {
+  height: 30vh;
+  width: 100%;
+}
+.projectBody .minorCards {
+  grid-area: content;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: auto;
+}
+.projectBody .minorCards .galleryImage {
+  height: 18.75rem;
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  .projectBody {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 320px) {
+  .contactPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .contactPage .wrapper .intro > * {
+    margin-bottom: 0;
+  }
+  .contactPage .wrapper .paragraphContent {
+    max-width: 18.75rem;
+    text-align: right;
+  }
+  .contactPage .wrapper .contactImage {
+    height: 8rem;
+    max-width: 18.75rem;
+  }
+  .contactPage .wrapper .contactImage img {
+    object-position: center 12%;
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  }
+  .contactPage .wrapper form {
+    margin: 0 auto;
+  }
+  .contactPage .wrapper form .formGroup {
+    margin-top: 0.938rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, auto);
+  }
+  .contactPage .wrapper form .formGroup label {
+    font-family: "raleway", sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+  }
+  .contactPage .wrapper form .formGroup .errorPlaceholder::placeholder {
+    color: #EE0000;
+  }
+  .contactPage .wrapper form .formGroup input {
+    margin-bottom: 0.938rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.125rem;
+    border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-right: 0.125rem #000000 solid;
+    border-bottom: 0.125rem #000000 solid;
+    font-size: 90%;
+    font-family: "raleway", sans-serif;
+  }
+  .contactPage .wrapper form .formGroup textarea {
+    width: 18.75rem;
+    max-width: 18.75rem;
+    min-width: 18.75rem;
+    height: 5.125rem;
+    min-height: 5.125rem;
+    max-height: 18.75rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.125rem;
+    border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-right: 0.125rem #000000 solid;
+    border-bottom: 0.125rem #000000 solid;
+    font-size: 90%;
+    font-family: "raleway", sans-serif;
+  }
+  .contactPage .wrapper form button {
+    margin-top: 0.938rem;
+    background-color: #ffffff;
+    color: #0000EE;
+    font-family: "raleway", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    font-size: 90%;
+    font-weight: 600;
+    border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+    border-right: 0.125rem #000000 solid;
+    border-bottom: 0.125rem #000000 solid;
+    border-radius: 0.125rem;
+    height: 1.875rem;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .contactPage .wrapper form button:active {
+    color: #EE0000;
+    border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+    border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  }
+}
+@media (min-width: 955px) {
+  .contactPage {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .contactPage .wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "h1 h1" "p  p" "c  c";
+    grid-gap: 0.938rem;
+  }
+  .contactPage .wrapper .intro {
+    grid-area: h1;
+  }
+  .contactPage .wrapper .intro > * {
+    font-size: 400%;
+  }
+  .contactPage .wrapper .paragraphContent {
+    grid-area: p;
+    max-width: 37.5rem;
+  }
+  .contactPage .wrapper .content {
+    grid-area: c;
+    display: flex;
+  }
+  .contactPage .wrapper .content .form {
+    flex: 0 0 60%;
+    margin-left: 0.938rem;
+  }
+  .contactPage .wrapper .content .contactImage {
+    height: auto;
+    margin-right: 0.938rem;
+    flex: 1;
+    position: relative;
+  }
+  .contactPage .wrapper .content .contactImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+@media (min-width: 320px) {
+  .thankYouPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .thankYouPage .wrapper {
+    margin: 50px auto;
+  }
+  .thankYouPage .wrapper .thankYou * {
+    font-size: 200%;
+  }
+  .thankYouPage .wrapper .content {
+    display: flex;
+    flex-direction: column-reverse;
+    object-position: 70% 10%;
+  }
+  .thankYouPage .wrapper .content .paragraphContent {
+    margin: 0.938rem 0;
+  }
+  .thankYouPage .wrapper .content .paragraphContent span {
+    font-weight: 600;
+  }
+  .thankYouPage .wrapper .content .echoImage {
+    height: 12rem;
+  }
+  .thankYouPage .wrapper .content .echoImage img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  }
+}
+@media (min-width: 900px) {
+  .thankYouPage {
+    margin: 0 auto;
+  }
+  .thankYouPage .wrapper .thankYou * {
+    font-size: 270%;
+  }
+  .thankYouPage .wrapper .content .paragraphContent {
+    text-align: justify;
+    margin: 0.938rem 0;
+  }
+  .thankYouPage .wrapper .content .echoImage {
+    height: 10rem;
+    width: 100%;
+    position: relative;
+    margin: 0 0 0 0;
+  }
+  .thankYouPage .wrapper .content .echoImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+@media (min-width: 320px) {
+  .backendIndex .wrapper {
+    margin: 3.125rem auto 0 auto;
+  }
+  .backendIndex .wrapper .content {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .backendIndex .wrapper .content .paragraphContent {
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 0.938rem;
+  }
+  .backendIndex .wrapper .content .paragraphContent p .asciiExample {
+    display: none;
+  }
+  .backendIndex .wrapper .content .backendImage {
+    height: 12rem;
+    width: 100%;
+    margin-bottom: 0.938rem;
+    position: relative;
+  }
+  .backendIndex .wrapper .content .backendImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border: solid 0.375rem #ffffff;
+    outline: solid 0.25rem rgba(0, 0, 0, 0.75);
+  }
+}
+@media (min-width: 1029px) {
+  .backendIndex {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .backendIndex .wrapper h1 {
+    font-family: "Abril Fatface", cursive;
+    grid-area: h1;
+    font-size: 400%;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .backendIndex .wrapper .content {
+    grid-area: c;
+    display: flex;
+  }
+  .backendIndex .wrapper .content .paragraphContent {
+    flex: 0 0 35%;
+    margin-right: 0.938rem;
+  }
+}
+@media (min-width: 1290px) {
+  .wrapper {
+    height: auto;
+  }
+  .wrapper .paragraphContent {
+    font-size: 105%;
+  }
+}
+@media (min-width: 1435px) {
+  .backendIndex .wrapper .intro {
+    font-size: 500%;
+  }
+}
+.adminAccess .wrapper {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+.adminAccess .wrapper h1 {
+  font-family: "Abril Fatface", cursive;
+  grid-area: h1;
+  font-size: 250%;
+  color: rgba(0, 0, 0, 0.75);
+  font-family: "Abril Fatface", cursive;
+}
+.adminAccess .wrapper .formGroup label {
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.625rem;
+}
+.adminAccess .wrapper .formGroup input {
+  margin-bottom: 0.938rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.125rem;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  font-size: 90%;
+  font-family: "raleway", sans-serif;
+  width: 100%;
+}
+.adminAccess .wrapper button {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+}
+.adminAccess .wrapper button:active {
+  color: #EE0000;
+  border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+}
+
+.editBackend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0;
+}
+.editBackend .wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+.editBackend .wrapper h1 {
+  color: "Abril Fatface", cursive;
+}
+.editBackend .wrapper .formGroup {
+  display: block;
+}
+.editBackend .wrapper .formGroup .titleInput label, .editBackend .wrapper .formGroup .paragraphInput label {
+  display: block;
+  margin-top: 0.938rem;
+}
+.editBackend .wrapper .formGroup .titleInput input {
+  font-family: "Abril Fatface", cursive;
+  font-size: 150%;
+  color: rgba(0, 0, 0, 0.75);
+  width: 100%;
+}
+.editBackend .wrapper .formGroup .submitRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.editBackend .wrapper .formGroup label {
+  font-family: "raleway", sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.625rem;
+}
+.editBackend .wrapper .formGroup input {
+  margin-bottom: 0.938rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.125rem;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  font-size: 90%;
+  font-family: "raleway", sans-serif;
+}
+.editBackend .wrapper .formGroup textarea {
+  margin-bottom: 0.938rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.125rem;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  font-size: 90%;
+  font-family: "raleway", sans-serif;
+  width: 100%;
+  height: 300px;
+  resize: none;
+}
+.editBackend .wrapper .formGroup button {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0;
+}
+.editBackend .wrapper .formGroup button:active {
+  color: #EE0000;
+  border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+}
+
+@media (min-width: 1272px) {
+  .editBackend {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.editBackend .formGroup svg {
+  fill: rgba(0, 0, 0, 0.75);
+}
+.editBackend .formGroup .accordion {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  transition: 10;
+}
+.editBackend .formGroup .accordion:active {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+  transition: 10;
+}
+.editBackend .formGroup .svgAlign {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.editBackend .formGroup .svgAlign .svg {
+  width: 75%;
+}
+.editBackend .formGroup .svgAlign .svgDelete {
+  color: #EE0000;
+  position: absolute;
+  right: 0;
+  width: 20%;
+  height: 56px;
+  margin: 0.938rem 0;
+}
+.editBackend .formGroup input {
+  width: 100%;
+}
+
+.editBackend .wrapper .formGroup textarea {
+  margin: 0.938rem 0;
+}
+
+.editBackend .wrapper .formGroup input {
+  font-family: "Abril Fatface", cursive;
+  font-size: 150%;
+  color: rgba(0, 0, 0, 0.75);
+  margin: 0.938rem 0;
+}
+
+.editBackend .wrapper .formGroup .svg {
+  font-family: "raleway", sans-serif;
+}
+
+.updateProject {
+  margin-top: 0.938rem;
+  background-color: #ffffff;
+  color: #0000EE;
+  font-family: "raleway", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 90%;
+  font-weight: 600;
+  border-left: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-top: 0.0625rem rgba(0, 0, 0, 0.75) solid;
+  border-right: 0.125rem #000000 solid;
+  border-bottom: 0.125rem #000000 solid;
+  border-radius: 0.125rem;
+  height: 1.875rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.updateProject:active {
+  color: #EE0000;
+  border-right: 0.125rem rgba(0, 0, 0, 0.75) solid;
+  border-bottom: 0.125rem rgba(0, 0, 0, 0.75) solid;
+}
+
+.editProjects .wrapper .formGroup .panel label {
+  margin: 0.938rem 0 0.625rem 0;
+}
+
+/*# sourceMappingURL=styles.css.map */

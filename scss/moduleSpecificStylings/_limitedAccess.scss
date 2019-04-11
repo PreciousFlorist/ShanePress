@@ -1,0 +1,62 @@
+
+
+.dialogoverlay{
+	display: none;
+	opacity: .8;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #f5f5f5;
+	width: 100%;
+	z-index: 10;
+}
+
+.dialogbox{
+    margin-left: 50%;
+    top: 15rem;
+    transform: translateX(-50%);
+	display: none;
+	position: fixed;
+    background: #f5f5f5; 
+    border: solid 0.375rem $lightAccent;
+    outline: solid 0.25rem $textColour;
+
+    width: 90vw;
+    max-width: 30rem;
+    z-index: 10;
+
+    .alertWrapper{ 
+        background: $backgroundColour;
+
+        .dialogboxhead{
+            background: $backgroundColour;
+            font-family: $headingFont;
+            color: $textColour;
+            font-size: 1.5rem; 
+            padding: $minorSpacing; 
+            text-decoration: underline;
+        }
+        .dialogboxbody{
+            background: $backgroundColour;
+            font-family: $textFont;
+            color: $textColour;
+            font-size: 1rem;
+            padding: $moderateSpacing; 
+
+        }
+
+        .dialogboxfoot{
+            background: $backgroundColour;
+            padding: $minorSpacing; 
+            text-align:right;
+
+            button{
+                @include button;
+                margin-top: 0 !important;
+                &:active{
+                    @include activeButton;
+                }
+            }
+        } 
+    }
+}
