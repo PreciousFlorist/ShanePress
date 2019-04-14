@@ -66,7 +66,7 @@ if($_SESSION["permission"] == "visitor"){
             unset($_SESSION["adminIndexImage"]);
         }
         
-        header("location: https://www.shanewalders.com/backend/backendIndex.php");
+        header("location: https://www.shanewalders.com/backend/backendIndex");
         die();
     }
 }   
@@ -76,9 +76,9 @@ if($_SESSION["permission"] == "visitor"){
 --------------------*/
 if ($_SESSION["permission"] == "admin" && isset($_SESSION["timer"]) ){
     if(
-        isset($_POST["adminIndexTitle"] )        == TRUE
+          isset($_POST["adminIndexTitle"] )        == TRUE
         ||isset($_POST["adminIndexParagraph"] )    == TRUE
-        ||isset($_POST["homeImage"] )              == TRUE
+
     ){
 
         // We"re going to store these changes into the database, so establish a connection to the server here...
@@ -88,62 +88,39 @@ if ($_SESSION["permission"] == "admin" && isset($_SESSION["timer"]) ){
             die("The server connection failed: " . $mysqli->connect_error);
         }
 
-        // Once we"re connected to the mySQL database, check if the page title has changed
-        if(
-            empty($_POST["adminIndexTitle"] ) == FALSE
-        ){
-            $adminIndexTitle = filter_var(ucfirst(trim ($_POST["adminIndexTitle"] ) ), FILTER_SANITIZE_STRING);
+        // Here, I have placed all of the form fields and SQL SET locations into an array
+        // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+        // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+        $inputDataField = array(
+            "adminIndexTitle title",
+            "adminIndexParagraph paragraph"
+        );
 
-            if(ctype_space($adminIndexTitle) == FALSE){
+        foreach($inputDataField as $data){
+            // We will explode the string that includes both the form field and the sql destination
+            // And then we will store this data into two seperate variables
+            $data = explode(" ", $data);
 
-                // Sanitize the variable
-                $adminIndexTitle      = mysqli_real_escape_string($serverConnection, $adminIndexTitle);
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
 
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$adminIndexTitle\" 
-                        WHERE   pageName = \"AdminIndex\"
-                    ";
+            if (isset($_POST["$formField"]) ){
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
 
-                mysqli_query($serverConnection, $sql);
-            }
-        } 
-
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["adminIndexParagraph"] ) == FALSE
-        ){
-            $adminIndexParagraph = filter_var(ucfirst(trim ($_POST["adminIndexParagraph"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($adminIndexParagraph) == FALSE){
+                if(ctype_space($formField) == FALSE){
                     
-                // Sanitize the variable
-                $adminIndexParagraph      = mysqli_real_escape_string($serverConnection, $adminIndexParagraph);
+                    $sql = "UPDATE  majorPages
+                            SET     $sqlDestination = \"$formField\" 
+                            WHERE   pageName = \"AdminIndex\"
+                        ";
 
-                // And push the data upto the majorPages database
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$adminIndexParagraph\" 
-                        WHERE   pageName = \"AdminIndex\" 
-                    ";
-
-                mysqli_query($serverConnection, $sql);
+                    mysqli_query($serverConnection, $sql);
+                }
             }
-        } 
-        
-        // Check the image
-        if(
-            empty($_POST["adminIndexImage"] ) == FALSE
-        ){
-            $adminIndexImage = filter_var((trim ($_POST["adminIndexImage"] ) ), FILTER_SANITIZE_STRING);
-        } else{
-            unset($_SESSION["adminIndexImage"]);
         }
-        //Remove any local stylings that may have been made using sessions on this device
-        unset($_SESSION["adminIndexTitleSession"]);
-        unset($_SESSION["adminIndexParagraphSession"]);
-        // And finally, close the server connection, and direct the user to the home page
 
         $serverConnection->close();
-        header("location: https://www.shanewalders.com/backend/backendIndex.php");
+        header("location: https://www.shanewalders.com/backend/backendIndex");
         die();
     }
 } 

@@ -37,494 +37,133 @@ if ($_SESSION["permission"] == "admin" && isset($_SESSION["timer"]) ){
         if ($serverConnection->connect_error) {
             die("The server connection failed: " . $mysqli->connect_error);
         }
+/*--------------------
+# DELETE THE SVG CONTETNT
+--------------------*/
 
-    // Delete the SVG Icons, if requested
-        if( isset($_POST["deleteFourthSVGOne"])){
-            // And push the data upto the projects database
-            $sql = "UPDATE  projects
-                    SET     projectSymbolSVGOne = NULL
-                    WHERE   projectID = 4
-                ";
+            $deleteSVG = array(
+                "deleteFourthSVGOne projectSymbolSVGOne",
+                "deleteFourthSVGTwo projectSymbolSVGTwo",
+                "deleteFourthSVGThree projectSymbolSVGThree",
+                "deleteFourthSVGFour projectSymbolSVGFour",
+                "deleteFourthSVGFive projectSymbolSVGFive"
+            );
 
-            mysqli_query($serverConnection, $sql);
+            foreach($deleteSVG as $data){
+                // We will explode the string that includes both the form field and the sql destination
+                // And then we will store this data into two seperate variables
+                $data = explode(" ", $data);
 
-            header("location: https://www.shanewalders.com/edit/minorProjectSecond.php");
-            die();
-        }
-        if( isset($_POST["deleteFourthSVGTwo"])){
-            // And push the data upto the projects database
-            $sql = "UPDATE  projects
-                    SET     projectSymbolSVGTwo = NULL
-                    WHERE   projectID = 4
-                ";
+                $svg            = $data[0];
+                $sqlLocation    = $data[1];
 
-            mysqli_query($serverConnection, $sql);
-            header("location: https://www.shanewalders.com/edit/minorProjectSecond.php");
-            die();
-        }
-        if( isset($_POST["deleteFourthSVGThree"])){
-            // And push the data upto the projects database
-            $sql = "UPDATE  projects
-                    SET     projectSymbolSVGThree = NULL
-                    WHERE   projectID = 4
-                ";
+                if (isset($_POST["$svg"]) ){
 
-            mysqli_query($serverConnection, $sql);
-
-            header("location: https://www.shanewalders.com/edit/minorProjectSecond.php");
-            die();
-        }
-        if( isset($_POST["deleteFourthSVGFour"])){
-            // And push the data upto the projects database
-            $sql = "UPDATE  projects
-                    SET     projectSymbolSVGFour = NULL
-                    WHERE   projectID = 4
-                ";
-
-            mysqli_query($serverConnection, $sql);
-
-            header("location: https://www.shanewalders.com/edit/minorProjectSecond.php");
-            die();
-        }
-        if( isset($_POST["deleteFourthSVGFive"])){
-            // And push the data upto the projects database
-            $sql = "UPDATE  projects
-                    SET     projectSymbolSVGFive = NULL
-                    WHERE   projectID = 4
-                ";
-
-            mysqli_query($serverConnection, $sql);
-
-            header("location: https://www.shanewalders.com/edit/minorProjectSecond.php");
-            die();
-        }
-
-        // Once we"re connected to the mySQL database, check if the page title has changed
-        if(
-            empty($_POST["fourthProjectTitle"] ) == FALSE
-        ){
-            $projectTitle = filter_var(ucfirst(trim ($_POST["fourthProjectTitle"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectTitle) == FALSE){
-
-                // Sanitize the variable
-                $projectTitle      = mysqli_real_escape_string($serverConnection, $projectTitle);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectTitle
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedTitle     = $retrievedArray['projectTitle'];
-
-                if($projectTitle !== $retrievedTitle){
-
-                    // And push the data upto the projects database
                     $sql = "UPDATE  projects
-                            SET     projectTitle = \"$projectTitle\" 
-                            WHERE   projectID = 4
-                        ";
+                            SET     $sqlLocation = NULL
+                            WHERE   projectID = 4";
 
-                    mysqli_query($serverConnection, $sql); 
-                }
+                    mysqli_query($serverConnection, $sql);
 
-            }
-        }
-
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["fourthProjectIntroParagraph"] ) == FALSE
-        ){
-            $projectParagraph = filter_var(ucfirst(trim ($_POST["fourthProjectIntroParagraph"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectParagraph) == FALSE){
-                    
-                // Sanitize the variable
-                $projectParagraph      = mysqli_real_escape_string($serverConnection, $projectParagraph);
-
-                // And push the data upto the projects database
-                $sql = "UPDATE  projects
-                        SET     projectIntroParagraph = \"$projectParagraph\" 
-                        WHERE   projectID = 4
-                    ";
-
-                mysqli_query($serverConnection, $sql); 
-            }
-        } 
-
-    // Check the SVG inputs
-    // First SVG
-        if(
-            empty($_POST["fourthSVGOne"] ) == FALSE
-        ){
-
-            $svg            = filter_var(trim ($_POST["fourthSVGOne"] ));
-            $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-            $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-
-            $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-            $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-            if(ctype_space($svg) == FALSE){
-                    
-                // Sanitize the variable
-                $svg = mysqli_real_escape_string($serverConnection, $svg);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectSymbolSVGOne
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedSVG       = $retrievedArray['projectSymbolSVGOne'];
-
-                if($svg !== $retrievedSVG){
-
-                    // And push the data upto the projects database
-                    $sql = "UPDATE  projects
-                            SET     projectSymbolSVGOne = \"$svg\" 
-                            WHERE   projectID = 4
-                        ";
-
-                    mysqli_query($serverConnection, $sql); 
+                    header("location: https://www.shanewalders.com/edit/minorProjectSecond");
+                    die();
                 }
             }
-        }
 
-    // Second SVG
-        if(
-            empty($_POST["fourthSVGTwo"] ) == FALSE
-        ){
+/*--------------------
+# UPDATE HTML CONTETNT
+--------------------*/
 
-            $svg            = filter_var(trim ($_POST["fourthSVGTwo"] ));
-            $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-            $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-            
-            $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-            $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-            if(ctype_space($svg) == FALSE){
-                    
-                // Sanitize the variable
-                $svg = mysqli_real_escape_string($serverConnection, $svg);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectSymbolSVGTwo
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedSVG       = $retrievedArray['projectSymbolSVGTwo'];
-
-                if($svg !== $retrievedSVG){
-
-                    // And push the data upto the projects database
-                    $sql = "UPDATE  projects
-                            SET     projectSymbolSVGTwo = \"$svg\" 
-                            WHERE   projectID = 4
-                        ";
-
-                    mysqli_query($serverConnection, $sql); 
-                }
-            }
-        }
-
-    // Third SVG
-        if(
-            empty($_POST["fourthSVGThree"] ) == FALSE
-        ){
-
-            $svg            = filter_var(trim ($_POST["fourthSVGThree"] ));
-            $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-            $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-            
-            $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-            $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-            if(ctype_space($svg) == FALSE){
-                    
-                // Sanitize the variable
-                $svg = mysqli_real_escape_string($serverConnection, $svg);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectSymbolSVGThree
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedSVG       = $retrievedArray['projectSymbolSVGThree'];
-
-                if($svg !== $retrievedSVG){
-
-
-                    // And push the data upto the projects database
-                    $sql = "UPDATE  projects
-                            SET     projectSymbolSVGThree = \"$svg\" 
-                            WHERE   projectID = 4
-                        ";
-
-                    mysqli_query($serverConnection, $sql); 
-                }
-            }
-        }
-
-    // Fourth SVG
-        if(
-            empty($_POST["fourthSVGFour"] ) == FALSE
-        ){
-
-            $svg            = filter_var(trim ($_POST["fourthSVGFour"] ));
-            $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-            $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-            
-            $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-            $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-            if(ctype_space($svg) == FALSE){
-                    
-                // Sanitize the variable
-                $svg = mysqli_real_escape_string($serverConnection, $svg);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectSymbolSVGFour
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedSVG       = $retrievedArray['projectSymbolSVGFour'];
-
-                if($svg !== $retrievedSVG){
-
-
-                    // And push the data upto the projects database
-                    $sql = "UPDATE  projects
-                            SET     projectSymbolSVGFour = \"$svg\" 
-                            WHERE   projectID = 4
-                        ";
-
-                    mysqli_query($serverConnection, $sql); 
-                }
-            }
-        }
-    // Fifth SVG
-        if(
-            empty($_POST["fourthSVGFive"] ) == FALSE
-        ){
-
-            $svg            = filter_var(trim ($_POST["fourthSVGFive"] ));
-
-            $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-            $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-            
-            $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-
-            $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-            if(ctype_space($svg) == FALSE){
-                    
-                // Sanitize the variable
-                $svg = mysqli_real_escape_string($serverConnection, $svg);
-                // Then, check to ensure that the content is not already the same as what's already been stored within the database
-                $sql = "SELECT  projectSymbolSVGFive
-                        FROM    projects
-                        WHERE   projectID = 4
-                    ";
-
-                $requestedData      = mysqli_query($serverConnection, $sql);
-                $retrievedArray     = mysqli_fetch_array($requestedData);
-                $retrievedSVG       = $retrievedArray['projectSymbolSVGFive'];
-
-                if($svg !== $retrievedSVG){
-
-                    // And push the data upto the projects database
-                    $sql = "UPDATE  projects
-                            SET     projectSymbolSVGFive = \"$svg\" 
-                            WHERE   projectID = 4
-                        ";
-
-                    mysqli_query($serverConnection, $sql); 
-                }
-            }
-        }
-
-//
-// This is the first set of headers and excerpts
-//
-        if(
-            empty($_POST["fourthSubHeadingOne"] ) == FALSE
-        ){
-            $projectSubTitle = filter_var(trim ($_POST["fourthSubHeadingOne"] ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubTitle) == FALSE){
-
-                // Sanitize the variable
-                $projectSubTitle      = mysqli_real_escape_string($serverConnection, $projectSubTitle);
-
-                $sql = "UPDATE  projects
-                        SET     projectSubHeaderOne = \"$projectSubTitle\" 
-                        WHERE   projectID = 4
-                ";
+            // Here, I have placed all of the form fields and SQL SET locations into an array
+            // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+            // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+            $inputDataField = array(
+                "fourthProjectTitle projectTitle",
+                "fourthProjectIntroParagraph projectIntroParagraph",
                 
-                mysqli_query($serverConnection, $sql); 
+                "fourthSubHeadingOne projectSubHeaderOne",
+                "fourthExcerptOne projectSubExcerptOne",
+
+                "fourthSubHeadingTwo projectSubHeaderTwo",
+                "fourthExcerptTwo projectSubExcerptTwo",
+
+                "fourthSubHeadingThree projectSubHeaderThree",
+                "fourthExcerptThree projectSubExcerptThree",
+
+                "fourthSubHeadingFour projectSubHeaderFour",
+                "fourthExcerptFour projectSubExcerptFour"
+            );
+
+            foreach($inputDataField as $data){
+                // We will explode the string that includes both the form field and the sql destination
+                // And then we will store this data into two seperate variables
+                $data = explode(" ", $data);
+
+                $formField      = $data[0];
+                $sqlDestination = $data[1];
+
+                if (isset($_POST["$formField"]) ){
+                    $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
+
+                    if(ctype_space($formField) == FALSE){
+                        $sql = "UPDATE  projects
+                                SET     $sqlDestination = \"$formField\" 
+                                WHERE   projectID = 4";
+
+                        mysqli_query($serverConnection, $sql);
+                    }
+                }
             }
-        }
 
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["fourthExcerptOne"] ) == FALSE
-        ){
-            $projectSubExcerpt = filter_var(ucfirst(trim ($_POST["fourthExcerptOne"] ) ), FILTER_SANITIZE_STRING);
 
-            if(ctype_space($projectSubExcerpt) == FALSE){
-                    
-                // Sanitize the variable
-                $projectSubExcerpt      = mysqli_real_escape_string($serverConnection, $projectSubExcerpt);
+/*--------------------
+# UPDATE SVG ICONS
+--------------------*/
 
-                // And push the data upto the projects database
-                $sql = "UPDATE  projects
-                        SET     projectSubExcerptOne = \"$projectSubExcerpt\" 
-                        WHERE   projectID = 4
-                    ";
+            $inputDataField = array(
+                "fourthSVGOne projectSymbolSVGOne",
+                "fourthSVGTwo projectSymbolSVGTwo",
+                "fourthSVGThree projectSymbolSVGThree",
+                "fourthSVGFour projectSymbolSVGFour",
+                "fourthSVGFive projectSymbolSVGFive"
+            );
 
-                mysqli_query($serverConnection, $sql); 
+            foreach($inputDataField as $data){
+
+                $data = explode(" ", $data);
+
+                $svgField       = $data[0];
+                $sqlDestination = $data[1];
+
+                if (isset($_POST["$svgField"]) ){
+
+                    $svg            = filter_var(trim ($_POST["$svgField"] ));
+                    $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
+                    $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
+
+                    $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
+                    $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
+
+                    if(ctype_space($svg) == FALSE && !empty($svg) ){
+                        $sql = "UPDATE  projects
+                                SET     $sqlDestination = \"$svg\" 
+                                WHERE   projectID = 4";
+
+                        mysqli_query($serverConnection, $sql);
+
+                    } else {
+
+                        $sql = "UPDATE  projects
+                                SET     $sqlDestination = NULL 
+                                WHERE   projectID = 4";
+    
+                        mysqli_query($serverConnection, $sql);
+
+                    }
+                }
             }
-        }
-//
-// This is the second set of headers and excerpts
-//
-        if(
-            empty($_POST["fourthSubHeadingTwo"] ) == FALSE
-        ){
-            $projectSubTitle = filter_var(trim ($_POST["fourthSubHeadingTwo"] ), FILTER_SANITIZE_STRING);
 
-            if(ctype_space($projectSubTitle) == FALSE){
-
-                // Sanitize the variable
-                $projectSubTitle      = mysqli_real_escape_string($serverConnection, $projectSubTitle);
-
-                $sql = "UPDATE  projects
-                        SET     projectSubHeaderTwo = \"$projectSubTitle\" 
-                        WHERE   projectID = 4
-                ";
-                
-                mysqli_query($serverConnection, $sql); 
-            }
-        }
-
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["fourthExcerptTwo"] ) == FALSE
-        ){
-            $projectSubExcerpt = filter_var(ucfirst(trim ($_POST["fourthExcerptTwo"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubExcerpt) == FALSE){
-                    
-                // Sanitize the variable
-                $projectSubExcerpt      = mysqli_real_escape_string($serverConnection, $projectSubExcerpt);
-
-                // And push the data upto the projects database
-                $sql = "UPDATE  projects
-                        SET     projectSubExcerptTwo = \"$projectSubExcerpt\" 
-                        WHERE   projectID = 4
-                    ";
-
-                mysqli_query($serverConnection, $sql); 
-            }
-        }
-//
-// This is the third set of headers and excerpts
-//
-        if(
-            empty($_POST["fourthSubHeadingThree"] ) == FALSE
-        ){
-            $projectSubTitle = filter_var(trim ($_POST["fourthSubHeadingThree"] ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubTitle) == FALSE){
-
-                // Sanitize the variable
-                $projectSubTitle      = mysqli_real_escape_string($serverConnection, $projectSubTitle);
-
-                $sql = "UPDATE  projects
-                        SET     projectSubHeaderThree = \"$projectSubTitle\" 
-                        WHERE   projectID = 4
-                ";
-                
-                mysqli_query($serverConnection, $sql); 
-            }
-        }
-
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["fourthExcerptThree"] ) == FALSE
-        ){
-            $projectSubExcerpt = filter_var(ucfirst(trim ($_POST["fourthExcerptThree"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubExcerpt) == FALSE){
-                    
-                // Sanitize the variable
-                $projectSubExcerpt      = mysqli_real_escape_string($serverConnection, $projectSubExcerpt);
-
-                // And push the data upto the projects database
-                $sql = "UPDATE  projects
-                        SET     projectSubExcerptThree = \"$projectSubExcerpt\" 
-                        WHERE   projectID = 4
-                    ";
-
-                mysqli_query($serverConnection, $sql); 
-            }
-        } 
-
-//
-// This is the fourth set of headers and excerpts
-//
-        if(
-            empty($_POST["fourthSubHeadingFour"] ) == FALSE
-        ){
-            $projectSubTitle = filter_var(trim ($_POST["fourthSubHeadingFour"] ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubTitle) == FALSE){
-
-                // Sanitize the variable
-                $projectSubTitle      = mysqli_real_escape_string($serverConnection, $projectSubTitle);
-
-                $sql = "UPDATE  projects
-                        SET     projectSubHeaderFour = \"$projectSubTitle\" 
-                        WHERE   projectID = 4
-                ";
-                
-                mysqli_query($serverConnection, $sql); 
-            }
-        }
-
-        // Then, check the paragraph content has been changed
-        if(
-            empty($_POST["fourthExcerptFour"] ) == FALSE
-        ){
-            $projectSubExcerpt = filter_var(ucfirst(trim ($_POST["fourthExcerptFour"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($projectSubExcerpt) == FALSE){
-                    
-                // Sanitize the variable
-                $projectSubExcerpt      = mysqli_real_escape_string($serverConnection, $projectSubExcerpt);
-
-                // And push the data upto the projects database
-                $sql = "UPDATE  projects
-                        SET     projectSubExcerptFour = \"$projectSubExcerpt\" 
-                        WHERE   projectID = 4
-                    ";
-
-                mysqli_query($serverConnection, $sql); 
-            }
-        }
-
-        // And finally, close the server connection, and direct the user to the home page
-
+        // And finally, close the server connection, and direct the user to the appropriate page
         $serverConnection->close();
         header("location: https://www.shanewalders.com/projectProfiles/newsletterSubscription.php");
         die();

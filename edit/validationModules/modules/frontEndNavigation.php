@@ -23,7 +23,7 @@ $emailAccount       = "";
 if ($_SESSION["permission"] == "admin"){
 
     if(
-        isset($_POST["firstLink"] )      == TRUE
+      isset($_POST["firstLink"] )      == TRUE
 
     ||isset($_POST["secondLink"] )       == TRUE
     ||isset($_POST["thirdLink"] )        == TRUE
@@ -36,177 +36,83 @@ if ($_SESSION["permission"] == "admin"){
     ||isset($_POST["emailAddress"] )     == TRUE
     ){
 
-    // We"re going to store these changes into the database, so establish a connection to the server here...
-    $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
+        // We're going to store these changes into the database, so establish a connection to the server here...
+        $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
 
-    if ($serverConnection->connect_error) {
-        die("The server connection failed: " . $mysqli->connect_error);
-    }
-
-    // Once we"re connected to the mySQL database, check if the page title has changed
-    if(
-        empty($_POST["firstLink"] ) == FALSE
-    ){
-
-        $firstLink = filter_var(ucfirst(trim ($_POST["firstLink"] ) ), FILTER_SANITIZE_STRING);
-
-        if(ctype_space($firstLink) == FALSE){  
-            
-            // Sanitize the variable
-            $firstLink      = mysqli_real_escape_string($serverConnection, $firstLink);
-
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$firstLink\" 
-                    WHERE       type = \"home\";
-                ";
-
-            mysqli_query($serverConnection, $sql);
+        if ($serverConnection->connect_error) {
+            die("The server connection failed: " . $mysqli->connect_error);
         }
-    } 
 
-    if(
-        empty($_POST["secondLink"] ) == FALSE
-    ){
-        $secondLink = filter_var(ucfirst(trim ($_POST["secondLink"] ) ), FILTER_SANITIZE_STRING);
+        // Here, I have placed all of the form fields and SQL SET locations into an array
+        // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+        // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+        $inputDataField = array(
+            "firstLink home",
 
-        if(ctype_space($secondLink) == FALSE){               
-            // Sanitize the variable
-            $secondLink      = mysqli_real_escape_string($serverConnection, $secondLink);
+            "secondLink linkOne",
+            "thirdLink linkTwo",
+            "fourthLink linkThree",
 
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$secondLink\" 
-                    WHERE       type = \"linkOne\";
-                ";
+            "emailAddress email"
+        );
 
-            mysqli_query($serverConnection, $sql);
-        }
-    }
-        
-    if(
-        empty($_POST["thirdLink"] ) == FALSE
-    ){
-        $thirdLink = filter_var(ucfirst(trim ($_POST["thirdLink"] ) ), FILTER_SANITIZE_STRING);
+        foreach($inputDataField as $data){
+            // We will explode the string that includes both the form field and the sql destination
+            // And then we will store this data into two seperate variables
+            $data = explode(" ", $data);
 
-        if(ctype_space($thirdLink) == FALSE){               
-            // Sanitize the variable
-            $thirdLink      = mysqli_real_escape_string($serverConnection, $thirdLink);
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
 
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$thirdLink\" 
-                    WHERE       type = \"linkTwo\";
-                ";
+            if (isset($_POST["$formField"]) ){
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
 
-            mysqli_query($serverConnection, $sql);
-        }
-    } 
+                if(ctype_space($formField) == FALSE){
 
-    if(
-        empty($_POST["fourthLink"] ) == FALSE
-    ){
-        $fourthLink = filter_var(ucfirst(trim ($_POST["fourthLink"] ) ), FILTER_SANITIZE_STRING);
+                    $sql = "UPDATE      navigation 
+                            SET         linkValue = \"$formField\" 
+                            WHERE       type = \"$sqlDestination\"
+                        ";
 
-        if(ctype_space($fourthLink) == FALSE){               
-            // Sanitize the variable
-            $fourthLink      = mysqli_real_escape_string($serverConnection, $fourthLink);
-
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$fourthLink\" 
-                    WHERE       type = \"linkThree\";
-                ";
-
-            mysqli_query($serverConnection, $sql);
-        }
-    }
-
-    if(
-        empty($_POST["socialMediaOne"] ) == FALSE
-    ){
-
-        $svg            = filter_var(trim ($_POST["socialMediaOne"] ));
-
-        $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-        $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-        
-        $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-
-        $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-        if(ctype_space($svg) == FALSE){
-                
-                // And push the data upto the projects database
-                $sql = "UPDATE      navigation 
-                        SET         linkValue = \"$svg\" 
-                        WHERE       type = \"socialMediaOne\";
-                ";
-
-                mysqli_query($serverConnection, $sql); 
+                    mysqli_query($serverConnection, $sql);
+                }
             }
         }
-    }
 
-    if(
-        empty($_POST["socialMediaTwo"] ) == FALSE
-    ){
-        $svg            = filter_var(trim ($_POST["socialMediaTwo"] ));
+        $inputDataField = array(
+            "socialMediaOne socialMediaOne",
+            "socialMediaTwo socialMediaTwo",
+            "socialMediaThree socialMediaThree"
+        );
 
-        $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-        $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-        
-        $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
+        foreach($inputDataField as $data){
 
-        $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
 
-        if(ctype_space($svg) == FALSE){
+            $data = explode(" ", $data);
+
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
+
+            $formField            = filter_var(trim ($_POST["$formField"] ));            
+
+            if (isset($_POST["$formField"]) ){
+
+                $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
+                $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
                 
-            // And push the data upto the projects database
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$svg\" 
-                    WHERE       type = \"socialMediaTwo\";
-            ";
+                $formField            = str_replace($svgMarkdown, $svgMarkUp, $formField);
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
 
-            mysqli_query($serverConnection, $sql); 
-        }
-    }
+                if(ctype_space($formField) == FALSE){
 
-    if(
-        empty($_POST["socialMediaThree"] ) == FALSE
-    ){
-        $svg            = filter_var(trim ($_POST["socialMediaThree"] ));
+                    $sql = "UPDATE      navigation 
+                            SET         linkValue = \"$formField\" 
+                            WHERE       type = \"$sqlDestination\"
+                        ";
 
-        $svgMarkdown    = array("<svg", "><path", "/></svg>", "<i class=", "></i>");
-        $svgMarkUp      = array("$%10%$", "#1$1#", "$%01%$", "&*#", "#*&");
-        
-        $svg            = str_replace($svgMarkdown, $svgMarkUp, $svg);
-
-        $svg            = filter_var($svg, FILTER_SANITIZE_STRING);
-
-        if(ctype_space($svg) == FALSE){
-                
-            // And push the data upto the projects database
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$svg\" 
-                    WHERE       type = \"socialMediaThree\";
-            ";
-
-            mysqli_query($serverConnection, $sql); 
-        }
-    }
-
-    if(
-        empty($_POST["emailAddress"] ) == FALSE
-    ){
-        $emailAddress = filter_var(trim ($_POST["emailAddress"]  ), FILTER_SANITIZE_STRING);
-
-        if(ctype_space($emailAddress) == FALSE){               
-            // Sanitize the variable
-            $emailAddress      = mysqli_real_escape_string($serverConnection, $emailAddress);
-
-            $sql = "UPDATE      navigation 
-                    SET         linkValue = \"$emailAddress\" 
-                    WHERE       type = \"email\";
-                ";
-
-            mysqli_query($serverConnection, $sql);
+                    mysqli_query($serverConnection, $sql);
+                }
+            }
         }
     }
 }

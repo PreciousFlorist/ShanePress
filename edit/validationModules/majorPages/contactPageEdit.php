@@ -92,7 +92,7 @@ if($_SESSION["permission"] == "visitor"){
             setcookie("thankYouExcerpt", null, -1, "/");
         }
 
-        header("location: https://www.shanewalders.com/contact.php");
+        header("location: https://www.shanewalders.com/contact");
         die();
     }
 
@@ -107,112 +107,94 @@ if($_SESSION["permission"] == "visitor"){
 
 elseif ($_SESSION["permission"] == "admin"){
 
-    if(
-          isset($_POST["contactTitle"] )          == TRUE
-        ||isset($_POST["contactExcerpt"] )        == TRUE
+    $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
 
-        ||isset($_POST["thankYouTitle"] )         == TRUE
-        ||isset($_POST["thankYouExcerpt"] )       == TRUE
-
-    ){
-
-        $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
-
-        if ($serverConnection->connect_error) {
-            die("The server connection failed: " . $mysqli->connect_error);
-        }
+    if ($serverConnection->connect_error) {
+        die("The server connection failed: " . $mysqli->connect_error);
+    }
+    if(   isset($_POST["contactTitle"] )        == TRUE
+        ||isset($_POST["contactExcerpt"] )      == TRUE
+        ||isset($_POST["thankYouTitle"] )       == TRUE
+        ||isset($_POST["thankYouExcerpt"] )     == TRUE){
 
         if(
-            // Check the title
-            empty($_POST["contactTitle"] ) == FALSE
+              isset($_POST["contactTitle"] )        == TRUE
+            ||isset($_POST["contactExcerpt"] )      == TRUE
+
         ){
-            $contactTitle = filter_var(ucfirst(trim ($_POST["contactTitle"] ) ), FILTER_SANITIZE_STRING);
 
-            if(ctype_space($contactTitle) == FALSE){
+            // Here, I have placed all of the form fields and SQL SET locations into an array
+            // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+            // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+            $inputDataField = array(
+                "contactTitle title",
+                "contactExcerpt paragraph"
+            );
 
-                // Sanitize the variable
-                $contactTitle      = mysqli_real_escape_string($serverConnection, $contactTitle);
+            foreach($inputDataField as $data){
+                // We will explode the string that includes both the form field and the sql destination
+                // And then we will store this data into two seperate variables
+                $data = explode(" ", $data);
 
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$contactTitle\" 
-                        WHERE   pageName = \"Contact\"
-                    ";
+                $formField      = $data[0];
+                $sqlDestination = $data[1];
 
-                mysqli_query($serverConnection, $sql);
+                if (isset($_POST["$formField"]) ){
+                    $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
+
+                    if(ctype_space($formField) == FALSE){
+                        
+                        $sql = "UPDATE  majorPages
+                                SET     $sqlDestination = \"$formField\" 
+                                WHERE   pageName = \"Contact\"
+                            ";
+
+                        mysqli_query($serverConnection, $sql);
+                    }
+                }
             }
         }
-    
-        if(
-            // Check the excerpt content
-            empty($_POST["contactExcerpt"] ) == FALSE
-        ){
-            $contactExcerpt = filter_var(ucfirst(trim ($_POST["contactExcerpt"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($contactExcerpt) == FALSE){
-                // Sanitize the variable
-                $contactExcerpt      = mysqli_real_escape_string($serverConnection, $contactExcerpt);
-
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$contactExcerpt\" 
-                        WHERE   pageName = \"Contact\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-
-        } 
+        
 
 /*--------------------------------------------------------------
 # CONTACT FORM - THANK YOU PAGE
 --------------------------------------------------------------*/
 
         if(
-            // Check the title
-            empty($_POST["thankYouTitle"] ) == FALSE
+          isset($_POST["thankYouTitle"] )        == TRUE
+        ||isset($_POST["thankYouExcerpt"] )      == TRUE
+
         ){
-            $thankYouTitle = filter_var(ucfirst(trim ($_POST["thankYouTitle"] ) ), FILTER_SANITIZE_STRING);
 
-            if(ctype_space($thankYouTitle) == FALSE){
-                // Sanitize the variable
-                $thankYouTitle      = mysqli_real_escape_string($serverConnection, $thankYouTitle);
+            $inputDataField = array(
+                "thankYouTitle title",
+                "thankYouExcerpt paragraph"
+            );
 
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$thankYouTitle\" 
-                        WHERE   pageName = \"ThankYou\"
-                    ";
+            foreach($inputDataField as $data){
 
-                mysqli_query($serverConnection, $sql);
+                $data = explode(" ", $data);
+                $formField      = $data[0];
+                $sqlDestination = $data[1];
+
+                if (isset($_POST["$formField"]) ){
+                    $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
+
+                    if(ctype_space($formField) == FALSE){
+                        
+                        $sql = "UPDATE  majorPages
+                                SET     $sqlDestination = \"$formField\" 
+                                WHERE   pageName = \"ThankYou\"
+                            ";
+
+                        mysqli_query($serverConnection, $sql);
+                    }
+                }
             }
-        } 
-    
-        if(
-            // Check the excerpt content
-            empty($_POST["thankYouExcerpt"] ) == FALSE
-        ){
-            $thankYouExcerpt = filter_var(ucfirst(trim ($_POST["thankYouExcerpt"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($thankYouExcerpt) == FALSE){
-                // Sanitize the variable
-                $thankYouExcerpt      = mysqli_real_escape_string($serverConnection, $thankYouExcerpt);
-
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$thankYouExcerpt\" 
-                        WHERE   pageName = \"ThankYou\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-
-        } 
-
-        unset($_SESSION["contactTitleSession"]);
-        unset($_SESSION["contactExcerptSession"]);
-
-        unset($_SESSION["thankYouTitleSession"]);
-        unset($_SESSION["thankYouExcerptSession"]);
-
+        }
+        
         $serverConnection->close();
-        header("location: https://www.shanewalders.com/contact.php");
-        die();
+        header("location: https://www.shanewalders.com/contact");
+        die(); 
     }
 }

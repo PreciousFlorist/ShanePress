@@ -51,7 +51,7 @@ if($_SESSION["permission"] == "visitor"){
             setcookie("workExcerpt", null, -1, "/");
         }
 
-        header("location: https://shanewalders.com/work.php");
+        header("location: https://shanewalders.com/work");
         die();
     }
 }
@@ -61,57 +61,52 @@ if($_SESSION["permission"] == "visitor"){
 --------------------*/
 
 elseif ($_SESSION["permission"] == "admin"){
+
+    $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
+
+    if ($serverConnection->connect_error) {
+        die("The server connection failed: " . $mysqli->connect_error);
+    }
+    
     if(
-        isset($_POST["workTitle"] )          == TRUE
-      ||isset($_POST["workExcerpt"] )        == TRUE
+          isset($_POST["workTitle"] )        == TRUE
+        ||isset($_POST["workExcerpt"] )    == TRUE
 
     ){
 
-        $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
-        if ($serverConnection->connect_error) {
-            die("The server connection failed: " . $mysqli->connect_error);
+        // Here, I have placed all of the form fields and SQL SET locations into an array
+        // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+        // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+        $inputDataField = array(
+            "workTitle title",
+            "workExcerpt paragraph"
+        );
+
+        foreach($inputDataField as $data){
+            // We will explode the string that includes both the form field and the sql destination
+            // And then we will store this data into two seperate variables
+            $data = explode(" ", $data);
+
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
+
+            if (isset($_POST["$formField"]) ){
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
+
+                if(ctype_space($formField) == FALSE){
+                    
+                    $sql = "UPDATE  majorPages
+                            SET     $sqlDestination = \"$formField\" 
+                            WHERE   pageName = \"Work\"
+                        ";
+
+                    mysqli_query($serverConnection, $sql);
+                }
+            }
         }
 
-        // Check the title
-        if(
-            empty($_POST["workTitle"] ) == FALSE
-        ){
-            $workTitle = filter_var(ucfirst(trim ($_POST["workTitle"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($workTitle) == FALSE){
-
-                $workTitle      = mysqli_real_escape_string($serverConnection, $workTitle);
-
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$workTitle\" 
-                        WHERE   pageName = \"Work\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-        } 
-        // Check the excerpt content
-        if(
-            empty($_POST["workExcerpt"] ) == FALSE
-        ){
-            $workExcerpt = filter_var(ucfirst(trim ($_POST["workExcerpt"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($workExcerpt) == FALSE){
-
-            // Sanitize the variable
-                $workExcerpt      = mysqli_real_escape_string($serverConnection, $workExcerpt);
-
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$workExcerpt\" 
-                        WHERE   pageName = \"Work\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-        } 
-
         $serverConnection->close();
-        header("location: https://shanewalders.com/work.php");
+        header("location: https://shanewalders.com/work");
         die();
     }
 }

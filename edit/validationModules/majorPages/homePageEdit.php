@@ -7,7 +7,7 @@
 // Reset variables (before information is processed)
     $homeTitle                              = "";
     $homeParagraph                          = "";
-    $homeImage                              = "";
+
 
 /*--------------------
 # Visitor Permissions
@@ -18,7 +18,7 @@ if($_SESSION["permission"] == "visitor"){
     if(
       isset($_POST["homeTitle"] )          == TRUE
     ||isset($_POST["homeParagraph"] )      == TRUE
-    ||isset($_POST["homeImage"] )          == TRUE
+
     ){
         
         if(
@@ -65,62 +65,49 @@ if($_SESSION["permission"] == "visitor"){
 
 elseif ($_SESSION["permission"] == "admin"){
 
+    $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
+
+    if ($serverConnection->connect_error) {
+        die("The server connection failed: " . $mysqli->connect_error);
+    }
+    
     if(
           isset($_POST["homeTitle"] )        == TRUE
         ||isset($_POST["homeParagraph"] )    == TRUE
-        ||isset($_POST["homeImage"] )        == TRUE
+
     ){
 
-        // We"re going to store these changes into the database, so establish a connection to the server here...
-        $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
+        // Here, I have placed all of the form fields and SQL SET locations into an array
+        // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+        // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+        $inputDataField = array(
+            "homeTitle title",
+            "homeParagraph paragraph"
+        );
 
-        if ($serverConnection->connect_error) {
-            die("The server connection failed: " . $mysqli->connect_error);
-        }
+        foreach($inputDataField as $data){
+            // We will explode the string that includes both the form field and the sql destination
+            // And then we will store this data into two seperate variables
+            $data = explode(" ", $data);
 
-        // Once we"re connected to the mySQL database, check if the page title has changed
-        if(
-            empty($_POST["homeTitle"] ) == FALSE
-        ){
-            $homeTitle = filter_var(ucfirst(trim ($_POST["homeTitle"] ) ), FILTER_SANITIZE_STRING);
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
 
-            if(ctype_space($homeTitle) == FALSE){               
-                // Sanitize the variable
-                $homeTitle      = mysqli_real_escape_string($serverConnection, $homeTitle);
+            if (isset($_POST["$formField"]) ){
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
 
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$homeTitle\" 
-                        WHERE   pageName = \"Home\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-        } 
-
-        // Then, check if the paragraph content has been changed
-        if(
-            empty($_POST["homeParagraph"] ) == FALSE
-        ){
-            $homeParagraph = filter_var(ucfirst(trim ($_POST["homeParagraph"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($homeParagraph) == FALSE){
+                if(ctype_space($formField) == FALSE){
                     
-                // Sanitize the variable
-                $homeParagraph      = mysqli_real_escape_string($serverConnection, $homeParagraph);
+                    $sql = "UPDATE  majorPages
+                            SET     $sqlDestination = \"$formField\" 
+                            WHERE   pageName = \"Home\"
+                        ";
 
-                // And push the data upto the majorPages database
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$homeParagraph\" 
-                        WHERE   pageName = \"Home\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
+                    mysqli_query($serverConnection, $sql);
+                }
             }
         } 
 
-        //Remove any local stylings that may have been made using sessions on this device
-        unset($_SESSION["homeTitleSession"]);
-        unset($_SESSION["homeParagraphSession"]);
         // And finally, close the server connection, and direct the user to the home page
         $serverConnection->close();
         header("location: https://www.shanewalders.com/");

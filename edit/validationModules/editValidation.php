@@ -16,7 +16,7 @@ if($_SESSION["permission"] !== "admin"
     session_unset($_SESSION["permission"]);
     session_destroy();   
     
-    header("location: ../index.php");
+    header("location: https://www.shanewalders.com");
     die();
 
 }

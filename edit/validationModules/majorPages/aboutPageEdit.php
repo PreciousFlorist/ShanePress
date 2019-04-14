@@ -16,7 +16,7 @@ if($_SESSION["permission"] == "visitor"){
     if(
           isset($_POST["aboutTitle"] )         == TRUE
         ||isset($_POST["aboutParagraph"] )     == TRUE
-        ||isset($_POST["aboutImage"] )         == TRUE
+
     ){
 
 
@@ -53,7 +53,7 @@ if($_SESSION["permission"] == "visitor"){
         setcookie("aboutParagraph", null, -1, "/");
     }
 
-        header("location: https://www.shanewalders.com/about.php");
+        header("location: https://www.shanewalders.com/about");
         die();
     }
 }
@@ -64,62 +64,51 @@ if($_SESSION["permission"] == "visitor"){
 
 elseif ($_SESSION["permission"] == "admin"){
 
+    $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
+
+    if ($serverConnection->connect_error) {
+        die("The server connection failed: " . $mysqli->connect_error);
+    }
+    
     if(
-        isset($_POST["aboutTitle"] )         == TRUE
-      ||isset($_POST["aboutParagraph"] )     == TRUE
-      ||isset($_POST["aboutImage"] )         == TRUE
+          isset($_POST["aboutTitle"] )        == TRUE
+        ||isset($_POST["aboutParagraph"] )    == TRUE
+
     ){
 
-        $serverConnection = new mysqli($serverIP, $username, $password, $databaseName);
-        if ($serverConnection->connect_error) {
-            die("The server connection failed: " . $mysqli->connect_error);
+        // Here, I have placed all of the form fields and SQL SET locations into an array
+        // We will store the $_POST data location and the SQL location wihtin one string, before we explode it from within a foreach loop
+        // the content is organized by the FORM FIELD LOCATION then the SQL SET LOCATION
+        $inputDataField = array(
+            "aboutTitle title",
+            "aboutParagraph paragraph"
+        );
+
+        foreach($inputDataField as $data){
+            // We will explode the string that includes both the form field and the sql destination
+            // And then we will store this data into two seperate variables
+            $data = explode(" ", $data);
+
+            $formField      = $data[0];
+            $sqlDestination = $data[1];
+
+            if (isset($_POST["$formField"]) ){
+                $formField = filter_var( trim ($_POST["$formField"]), FILTER_SANITIZE_STRING);
+
+                if(ctype_space($formField) == FALSE){
+                    
+                    $sql = "UPDATE  majorPages
+                            SET     $sqlDestination = \"$formField\" 
+                            WHERE   pageName = \"About\"
+                        ";
+
+                    mysqli_query($serverConnection, $sql);
+                }
+            }
         }
 
-        // Check the title
-        if(
-            empty($_POST["aboutTitle"] ) == FALSE
-        ){
-            $aboutTitle = filter_var(ucfirst(trim ($_POST["aboutTitle"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($aboutTitle) == FALSE){
-
-                $aboutTitle      = mysqli_real_escape_string($serverConnection, $aboutTitle);
-
-                $sql = "UPDATE  majorPages
-                        SET     title = \"$aboutTitle\" 
-                        WHERE   pageName = \"About\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-            }
-        } 
-
-        // Check the first paragraph content
-        if(
-          empty($_POST["aboutParagraph"] ) == FALSE
-        ){
-            $aboutParagraph = filter_var(ucfirst(trim ($_POST["aboutParagraph"] ) ), FILTER_SANITIZE_STRING);
-
-            if(ctype_space($aboutParagraph) == FALSE){
-
-                // Sanitize the variable
-                $aboutParagraph      = mysqli_real_escape_string($serverConnection, $aboutParagraph);
-
-                $sql = "UPDATE  majorPages
-                        SET     paragraph = \"$aboutParagraph\" 
-                        WHERE   pageName = \"About\"
-                    ";
-
-                mysqli_query($serverConnection, $sql);
-          }
-        } 
-  
-        //Remove any local stylings that may have been made using sessions on this device
-        unset($_SESSION["aboutTitleSession"]);
-        unset($_SESSION["aboutParagraphSession"]);
-
         $serverConnection->close();
-        header("location: https://www.shanewalders.com/about.php");
+        header("location: https://www.shanewalders.com/about");
         die();
     }
 }
